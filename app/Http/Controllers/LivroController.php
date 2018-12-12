@@ -3,6 +3,7 @@
 namespace Atividade\Http\Controllers;
 
 use Atividade\Livro;
+use Atividade\Autor;
 use Illuminate\Http\Request;
 
 class LivroController extends Controller
@@ -20,8 +21,9 @@ class LivroController extends Controller
 
     public function index()
     {
-        $livros = Livro::all();
-        return view('livro.index',["Livro"=>$livros]);
+        $livro = Livro::select('autors.nome as nome_autor','livros.*')->join('autors','livros.autor_id','=','autors.id')->paginate(20);
+
+        return view('livro.index',["livro"=>$livro]);
     }
 
     /**
@@ -31,7 +33,8 @@ class LivroController extends Controller
      */
     public function create()
     {
-        return view('livro.create');
+        $autor = Autor::all();
+        return view('livro.create',["autor"=>$autor]);
 
     }
 
@@ -43,8 +46,18 @@ class LivroController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nome' => 'required|unique:livros|max:255',
+            'autor_id' => 'required',
+            'quantidade' => 'required',
+            'preco' => 'required|max:12',
+        ]);
+
         $livro = new Livro;
         $livro->nome = $request->nome;
+        $livro->autor_id = $request->autor_id;
+        $livro->quantidade = $request->quantidade;
+        $livro->preco = $request->preco;
         $livro->save();
         return redirect(route('livro_index'))->with('msg', 'Livro cadastrada com sucesso!');;
     }
@@ -68,8 +81,11 @@ class LivroController extends Controller
      */
     public function edit(Livro $livro,$id)
     {
+
          $livro = Livro::where('id',$id)->first();
-         return view('livro.edit',['Livro'=>$livro]);
+         $autor = Autor::all();
+
+         return view('livro.edit',['livro'=>$livro,'autor'=>$autor]);
     }
 
     /**
@@ -81,6 +97,12 @@ class LivroController extends Controller
      */
     public function update(Request $request, Livro $livro)
     {
+        $request->validate([
+            'nome' => 'required|unique:livros|max:255',
+            'autor_id' => 'required',
+            'quantidade' => 'required',
+            'preco' => 'required|max:12',
+        ]);
         $livro = Livro::find($request->id);
         $livro->nome = $request->nome;
         $livro->update();

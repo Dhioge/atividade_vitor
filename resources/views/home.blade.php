@@ -1,8 +1,4 @@
 @extends('layouts.app')
-@section('menu')
-<li class='nav-link '><a href="{{ route('autor') }}"></a> Autor</li>
-<li class='nav-link '><a href="{{ route('livro') }}"></a> Livro</li>
-@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

@@ -28,8 +28,9 @@
                 </a>
                 @guest
                 @else
-                @yield('menu')
-                @endguest
+<li class='nav-link '><a href="{{ route('autor_index') }}"> Autor</a></li>
+<li class='nav-link '><a href="{{ route('livro_index') }}">Livro</a> </li>
+@endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

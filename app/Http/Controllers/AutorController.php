@@ -19,7 +19,8 @@ class AutorController extends Controller
      */
     public function index()
     {
-        //
+        $autores = Autor::paginate(20);
+        return view('autor.index',["autor"=>$autores]);
     }
 
     /**
@@ -29,7 +30,8 @@ class AutorController extends Controller
      */
     public function create()
     {
-        //
+        return view('autor.create');
+
     }
 
     /**
@@ -40,16 +42,24 @@ class AutorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required|max:255',
+            'data_de_nasc' => 'required',
+        ]);
+        $autor = new Autor;
+        $autor->nome = $request->nome;
+        $autor->data_de_nasc = $request->data_de_nasc;
+        $autor->save();
+        return redirect(route('autor_index'))->with('msg', 'autor cadastrada com sucesso!');;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \Atividade\Autor  $autor
+     * @param  \App\autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function show(Autor $autor)
+    public function show(autor $autor)
     {
         //
     }
@@ -57,34 +67,44 @@ class AutorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Atividade\Autor  $autor
+     * @param  \App\autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Autor $autor)
+    public function edit(autor $autor,$id)
     {
-        //
+
+         $autor = Autor::where('id',$id)->first();
+         return view('autor.edit',['autor'=>$autor]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Atividade\Autor  $autor
+     * @param  \App\autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Autor $autor)
+    public function update(Request $request, autor $autor)
     {
-        //
+        $request->validate([
+            'nome' => 'required|max:255',
+            'data_de_nasc' => 'required',
+        ]);
+        $autor = Autor::find($request->id);
+        $autor->nome = $request->nome;
+        $autor->update();
+        return redirect(route('autor_index'))->with('msg', 'autor autualizado com sucesso!');;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Atividade\Autor  $autor
+     * @param  \App\autor  $autor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Autor $autor)
+    public function destroy(Request $request)
     {
-        //
+        Autor::destroy($request->id_delete);
+        return redirect(route('autor_index'))->with('msg', 'autor excluida com sucesso!');;
     }
 }
