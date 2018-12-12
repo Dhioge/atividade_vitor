@@ -31,6 +31,8 @@
                                     @endforeach
 
                             </select>
+
+                            <a href="{{ route('autor_create') }}" class="btn btn-primary"> Cadastrar um Autor</a>
                           </div>
                     <div class="form-group">
                         <label for="ex">Quantidade</label>

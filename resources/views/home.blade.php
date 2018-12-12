@@ -12,7 +12,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    <center><a href="{{ route('livro_create') }}" class="btn btn-primary"> Cadastre Seu livro Aqui!</a></center>
                 </div>
             </div>
         </div>
