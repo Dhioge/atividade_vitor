@@ -34,10 +34,13 @@
                                         <td>{{ $item->data_de_nasc }}</td>
                                         <td>
                                                 <a href="{{ url('autor/edit/'.$item->id)}}" class="btn btn-warning">Editar</a>
-                                                <a href="{{ url('autor/edit/'.$item->id)}}" class="btn btn-danger">Excluir</a>
-                                                <i class="fa fa-trash"></i>
+                                                <form action="{{ route('autor_delete') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="id_delete" value="{{ $item->id }}">
+                                                  <button  class="btn btn-danger" onClick='confirm("Deseja realmente Excluir?")'>Excluir</button>
+                                                </form>
                                                 </a>
-                                            </td>
+                                        </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

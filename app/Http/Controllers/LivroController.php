@@ -59,7 +59,7 @@ class LivroController extends Controller
         $livro->quantidade = $request->quantidade;
         $livro->preco = $request->preco;
         $livro->save();
-        return redirect(route('livro_index'))->with('msg', 'Livro cadastrada com sucesso!');;
+        return redirect(route('livro_index'))->with('msg', 'Livro cadastrado com sucesso!');;
     }
 
     /**
@@ -106,7 +106,7 @@ class LivroController extends Controller
         $livro = Livro::find($request->id);
         $livro->nome = $request->nome;
         $livro->update();
-        return redirect(route('livro_index'))->with('msg', 'Livro atualizada com sucesso!');;
+        return redirect(route('livro_index'))->with('msg', 'Livro atualizado com sucesso!');;
     }
 
     /**
@@ -118,6 +118,6 @@ class LivroController extends Controller
     public function destroy(Request $request)
     {
         Livro::destroy($request->id_delete);
-        return redirect(route('livro_index'))->with('msg', 'Livro excluida com sucesso!');;
+        return redirect(route('livro_index'))->with('msg', 'Livro excluido com sucesso!');;
     }
 }

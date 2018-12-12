@@ -40,9 +40,13 @@
                                         <td>{{ $item->preco }}</td>
                                         <td>
                                             <a href="{{ url('livro/edit/'.$item->id)}}" class="btn btn-warning">Editar</a>
-                                            <a href="{{ url('livro/edit/'.$item->id)}}" class="btn btn-danger">Excluir</a>
+                                            <form action="{{ route('livro_delete') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id_delete" value="{{ $item->id }}">
+                                            <button  class="btn btn-danger" onClick='confirm("Deseja realmente Excluir?")';>Excluir</button>
                                             <i class="fa fa-trash"></i>
-                                            </a>
+                                            </form>
+
                                         </td>
                                         </tr>
                                         @endforeach

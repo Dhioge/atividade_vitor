@@ -50,7 +50,7 @@ class AutorController extends Controller
         $autor->nome = $request->nome;
         $autor->data_de_nasc = $request->data_de_nasc;
         $autor->save();
-        return redirect(route('autor_index'))->with('msg', 'autor cadastrada com sucesso!');;
+        return redirect(route('autor_index'))->with('msg', 'autor cadastrado com sucesso!');;
     }
 
     /**
@@ -104,6 +104,6 @@ class AutorController extends Controller
     public function destroy(Request $request)
     {
         Autor::destroy($request->id_delete);
-        return redirect(route('autor_index'))->with('msg', 'autor excluida com sucesso!');;
+        return redirect(route('autor_index'))->with('msg', 'autor excluido com sucesso!');;
     }
 }
