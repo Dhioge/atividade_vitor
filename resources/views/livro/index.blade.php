@@ -27,6 +27,8 @@
                                         <th>Preço</th>
                                         <th>Ação</th>
                                         </tr>
+
+
                                     </thead>
                                     <tbody>
 

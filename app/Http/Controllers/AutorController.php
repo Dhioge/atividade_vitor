@@ -73,6 +73,7 @@ class AutorController extends Controller
     public function edit(autor $autor,$id)
     {
 
+
          $autor = Autor::where('id',$id)->first();
          return view('autor.edit',['autor'=>$autor]);
     }
